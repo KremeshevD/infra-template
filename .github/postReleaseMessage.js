@@ -40,6 +40,7 @@ const postReleaseMessage = async () => {
           `${commit.sha} ${commit.commit.author.name} ${commit.commit.message}`
       )
       .join("\n");
+    console.log("Собрали информацию о коммитах в релизе")
     //постим информацию о релизе
     const post = await axios.patch(
       "https://api.tracker.yandex.net/v2/issues/HOMEWORKSHRI-135",
@@ -49,6 +50,7 @@ const postReleaseMessage = async () => {
       },
       headersTreker
     );
+    console.log("Разместили информацию о релизе в трекере")
     //добавляем комментарий
     const comment = await axios.post(
       "https://api.tracker.yandex.net/v2/issues/HOMEWORKSHRI-135/comments",
@@ -57,6 +59,7 @@ const postReleaseMessage = async () => {
       },
       headersTreker
     );
+    console.log("Разместили комментарии в трекере с тегом Docker сборки")
   } catch (error) {}
 };
 postReleaseMessage().then();
